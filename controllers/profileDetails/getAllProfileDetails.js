@@ -1,9 +1,9 @@
 const uploadFiles = require("../../services/upload-files");
-const NoticeBoard = require("../../models/ProfileDetails");
+const ProfileDetails = require("../../models/ProfileDetails");
 const formidable = require("formidable");
 const createError = require("http-errors");
 
-const getAllNoticeBoard = async (req, res, next) => {
+const getAllProfileDetails = async (req, res, next) => {
   try {
     const startIndex = parseInt(req.query.startIndex) || 0;
     const viewSize = parseInt(req.query.viewSize) || 10;
@@ -17,7 +17,7 @@ const getAllNoticeBoard = async (req, res, next) => {
         },
       ];
     }
-    const data = await NoticeBoard.aggregate([
+    const data = await ProfileDetails.aggregate([
       {
         $match: searchCriteria,
       },
@@ -41,7 +41,7 @@ const getAllNoticeBoard = async (req, res, next) => {
         },
       },
     ]);
-    const totalCount = await NoticeBoard.countDocuments(searchCriteria);
+    const totalCount = await ProfileDetails.countDocuments(searchCriteria);
 
     if (!data) throw createError.BadRequest("Notice Board not found");
     res.status(200).json({
@@ -57,4 +57,4 @@ const getAllNoticeBoard = async (req, res, next) => {
   }
 };
 
-module.exports = getAllNoticeBoard;
+module.exports = getAllProfileDetails;
