@@ -1,0 +1,94 @@
+const { number } = require("joi");
+const { Schema, model } = require("mongoose");
+
+const profileDetails = new Schema(
+  {
+
+    title: {
+      type: String,
+      required: true,
+    },
+
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    maritalStatus: {
+      type: String,
+      enum: ["Annulled_marriage","Common_Law","Divorced","Legally_Separated","Married","Single","Widowed"],
+      required: true,
+    },
+    countryOfResidence: {
+      type: String,
+      required: true,
+    },
+    countryOfCitizenship: {
+      type: String,
+      required: true,
+    },
+    dateOfBirth: {
+      type: Date,
+      required: true,
+    },
+    media: [
+      {
+        url: { type: String },
+        type: { type: String, default: "image" },
+      },
+    ],
+    address: {
+      type: String,
+      required: true,
+    },
+    primaryEmail: {
+      type: String,
+      required: true,
+    },
+    secondayrEmail: {
+      type: String,
+    },
+    primaryPhone: {
+      type: String,
+      required: true,
+    },
+    secondaryPhone: {
+      type: String,
+    },
+    partnerFirstName: {
+      type: String,
+    },
+    partnerLastName: {
+      type: String,
+    },
+    partnerCountryOfResidence: {
+      type: String,
+    },
+    partnerCountryOfCitizenship: {
+      type: String,
+    },
+    partnerEmail: {
+      type: String,
+    },
+    partnerPhone: {
+      type: String,
+    },
+    hasChildren: {
+      type: Boolean,
+    },
+    numberOfChildren: {
+      type: Number,
+    },
+    childrenDetails: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+module.exports = model("profileDetails", profileDetails, "profileDetails");
