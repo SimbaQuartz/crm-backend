@@ -1,13 +1,13 @@
 const uploadFiles = require("../../services/upload-files");
-const NoticeBoard = require("../../models/ProfileDetails");
+const ProfileDetails = require("../../models/ProfileDetails");
 const formidable = require("formidable");
 const createError = require("http-errors");
 const { ObjectId } = require("mongoose").Types;
 
-const getNoticeBoard = async (req, res, next) => {
+const getProfileDetails = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const data = await NoticeBoard.findOne({
+    const data = await ProfileDetails.findOne({
       _id: ObjectId(id),
     });
     if (!data) throw createError.BadRequest("Notice Board not found");
@@ -21,4 +21,4 @@ const getNoticeBoard = async (req, res, next) => {
   }
 };
 
-module.exports = getNoticeBoard;
+module.exports = getProfileDetails;
