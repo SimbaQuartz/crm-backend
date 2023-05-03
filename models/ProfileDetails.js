@@ -3,9 +3,9 @@ const { Schema, model } = require("mongoose");
 
 const profileDetails = new Schema(
   {
-
     title: {
       type: String,
+      enum: ["Mr", "Miss", "Mrs"],
       required: true,
     },
 
@@ -19,7 +19,15 @@ const profileDetails = new Schema(
     },
     maritalStatus: {
       type: String,
-      enum: ["Annulled_marriage","Common_Law","Divorced","Legally_Separated","Married","Single","Widowed"],
+      enum: [
+        "annulledMarriage",
+        "commonLaw",
+        "divorced",
+        "legallySeparated",
+        "married",
+        "single",
+        "widowed",
+      ],
       required: true,
     },
     countryOfResidence: {
