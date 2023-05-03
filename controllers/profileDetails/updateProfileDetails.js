@@ -1,10 +1,10 @@
 const uploadFiles = require("../../services/upload-files");
-const NoticeBoard = require("../../models/ProfileDetails");
+const ProfileDetails = require("../../models/ProfileDetails");
 const formidable = require("formidable");
 const createError = require("http-errors");
 const { isValidObjectId } = require("mongoose");
 const { ObjectId } = require("mongoose").Types;
-const updateNoticeBoard = async (req, res, next) => {
+const updateProfileDetails = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -15,9 +15,7 @@ const updateNoticeBoard = async (req, res, next) => {
         res.send(err);
       }
 
-      let { date, title, description, file } = fields;
-
-      console.log("file", file, fields);
+      let {title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails } = fields;
 
       // upload files to s3`
       const filesArray = Object.values(files);
@@ -40,19 +38,17 @@ const updateNoticeBoard = async (req, res, next) => {
         })
       );
 
-      const getNotice = await NoticeBoard.findOne({
+      const getNotice = await ProfileDetails.findOne({
         _id: Object(id),
       });
 
-      const noticeBoard = await NoticeBoard.findOneAndUpdate(
+      const profileDetails = await ProfileDetails.findOneAndUpdate(
         {
           _id: Object(id),
         },
         {
-          media: file ? getNotice?.media : allFileUploadedArray,
-          description,
-          date,
-          title,
+          media: files ? getNotice?.media : allFileUploadedArray,
+          title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails
         },
         { new: true }
       );
@@ -61,7 +57,7 @@ const updateNoticeBoard = async (req, res, next) => {
 
       res.status(200).json({
         success: true,
-        data: noticeBoard,
+        data: profileDetails,
       });
     });
   } catch (error) {
@@ -70,4 +66,4 @@ const updateNoticeBoard = async (req, res, next) => {
   }
 };
 
-module.exports = updateNoticeBoard;
+module.exports = updateProfileDetails;

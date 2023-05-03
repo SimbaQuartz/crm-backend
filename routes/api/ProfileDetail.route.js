@@ -1,13 +1,14 @@
 const express = require("express");
 const  createProfileDetails= require("../../controllers/profileDetails/createProfileDetails");
-const deleteNoticeBoard = require("../../controllers/profileDetails/deleteNoticeBoard");
-const updateNoticeBoard = require("../../controllers/profileDetails/updateNoticeBoard");
+const deleteProfileDetails = require("../../controllers/profileDetails/deleteProfileDetails");
+const updateProfileDetails = require("../../controllers/profileDetails/updateProfileDetails");
 const getNoticeBoard = require("../../controllers/profileDetails/getNoticeBoard");
 const getAllProfileDetails = require("../../controllers/profileDetails/getAllProfileDetails");
+
 const router = express.Router();
 router.post("/create", createProfileDetails);
-router.put("/:id", updateNoticeBoard);
-router.delete("/:id", deleteNoticeBoard);
+router.put("/:id", updateProfileDetails);
+router.delete("/:id", deleteProfileDetails);
 router.get("/:id", getNoticeBoard);
 router.get("/", getAllProfileDetails);
 

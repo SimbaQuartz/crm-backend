@@ -1,13 +1,13 @@
 const uploadFiles = require("../../services/upload-files");
-const NoticeBoard = require("../../models/ProfileDetails");
+const ProfileDetails = require("../../models/ProfileDetails");
 const formidable = require("formidable");
 const createError = require("http-errors");
 const { ObjectId } = require("mongoose").Types;
 
-const deleteNoticeBoard = async (req, res, next) => {
+const deleteProfileDetails = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await NoticeBoard.findOneAndDelete({
+    await ProfileDetails.findOneAndDelete({
       _id: ObjectId(id),
     });
     res.status(200).json({
@@ -19,4 +19,4 @@ const deleteNoticeBoard = async (req, res, next) => {
   }
 };
 
-module.exports = deleteNoticeBoard;
+module.exports = deleteProfileDetails;
