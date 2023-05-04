@@ -18,11 +18,11 @@ const { accessTokenLife, refreshTokenLife } = require("../../config/keys").jwt;
 
 const loginUser = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email: email }).exec();
+    const { email, siteId, password } = req.body;
+    const user = await User.findOne({ email: email ,siteId: siteId}).exec();
 
     if (!user) {
-      throw createError.BadRequest("Email or phone number is incorrect");
+      throw createError.BadRequest("Email or site ID is incorrect");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -32,6 +32,7 @@ const loginUser = async (req, res, next) => {
     const payload = {
       email: user.email,
       name: user.name,
+      siteId: user.siteId,
       role: "admin",
       _id: user._id,
     };

@@ -14,10 +14,10 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  // siteId:{
-  //   type: String,
-  //   required:true,
-  // },
+  siteId:{
+    type: String,
+    required: true,
+  },
 
   password: {
     type: String,

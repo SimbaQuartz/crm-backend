@@ -29,13 +29,14 @@ const registerUser = async (req, res, next) => {
     // const result = await registerValidation.validateAsync(req.body);
 
     // eslint-disable-next-line no-unused-vars
-    const { email, password, name, role } = req.body;
+    const { email, siteId, password, name, role } = req.body;
 
     // this runs when the user is new
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = new User({
       name,
+      siteId,
       email,
       password: hashedPassword,
       role,
@@ -79,6 +80,7 @@ const registerUser = async (req, res, next) => {
     const jwtPayload = {
       _id: createdUser._id,
       role: createdUser.role,
+      siteId: createdUser.siteId,
       email: createdUser.email,
       name: createdUser.name,
       verified: createdUser.verified,

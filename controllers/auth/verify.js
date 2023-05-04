@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
 
 // import verify token model and user model
-const User = require("../../models/User.model");
+const User = require("../../models/user.model");
 const VerifyTokenModel = require("../../models/VerifyToken.model");
 
 const verifyEmail = async (req, res, next) => {
