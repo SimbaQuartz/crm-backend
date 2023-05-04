@@ -1,5 +1,5 @@
 const express = require("express");
-const  createProfileDetails= require("../../controllers/profileDetails/createProfileDetails");
+const createProfileDetails= require("../../controllers/profileDetails/createProfileDetails");
 const deleteProfileDetails = require("../../controllers/profileDetails/deleteProfileDetails");
 const updateProfileDetails = require("../../controllers/profileDetails/updateProfileDetails");
 const getProfileDetails = require("../../controllers/profileDetails/getProfileDetails");
