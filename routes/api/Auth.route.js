@@ -9,6 +9,9 @@ const updateRegisteredUser = require("../../controllers/auth/updateRegisteredUse
 const forgotPassword = require("../../controllers/auth/forgotPassword");
 const verifyOtp = require("../../controllers/auth/verifyOtp");
 const resetPassword = require("../../controllers/auth/resetPassword");
+const logOutUser = require("../../controllers/auth/logout");
+const validateAccessToken = require("../../middlewares/jwtValidation")
+
 
 router.post("/registeruser", registerUser);
 router.get("/registeruser/:id", getRegisterUser);
@@ -19,5 +22,6 @@ router.post("/admin/login", loginUser);
 router.post("/forgotPassword", forgotPassword);
 router.post("/verifyOtp/:token", verifyOtp);
 router.post("/resetPassword", resetPassword);
+router.delete("/logout",validateAccessToken, logOutUser);
 
 module.exports = router;
