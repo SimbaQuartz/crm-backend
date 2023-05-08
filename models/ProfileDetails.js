@@ -93,6 +93,10 @@ const profileDetails = new Schema(
     childrenDetails: {
       type: String,
     },
+    imageName: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
