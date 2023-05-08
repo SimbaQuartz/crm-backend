@@ -38,16 +38,14 @@ const updateProfileDetails = async (req, res, next) => {
         })
       );
 
-      const getNotice = await ProfileDetails.findOne({
-        _id: Object(id),
-      });
+   
 
       const profileDetails = await ProfileDetails.findOneAndUpdate(
         {
           _id: Object(id),
         },
         {
-          media: files ? getNotice?.media : allFileUploadedArray,
+          media : allFileUploadedArray,
           title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails
         },
         { new: true }
