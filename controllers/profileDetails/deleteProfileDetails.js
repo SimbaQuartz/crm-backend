@@ -1,7 +1,4 @@
-const uploadFiles = require("../../services/upload-files");
 const ProfileDetails = require("../../models/ProfileDetails");
-const formidable = require("formidable");
-const createError = require("http-errors");
 const { ObjectId } = require("mongoose").Types;
 
 const deleteProfileDetails = async (req, res, next) => {
