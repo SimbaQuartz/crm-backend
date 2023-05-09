@@ -1,5 +1,6 @@
 const path = require("path"); 
 require("dotenv").config({
+  // keys
   path: "/home/ubuntu/crm-backend/.env",
 });
 
