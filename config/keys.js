@@ -1,6 +1,6 @@
-// const path = require("path");
+const path = require("path"); 
 require("dotenv").config({
-  // path: "/home/ubuntu/lyallpur-khalsa-college_team-backend/.env",
+  path: "/home/ubuntu/crm-backend/.env",
 });
 
 module.exports = {
