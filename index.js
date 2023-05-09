@@ -25,6 +25,8 @@ const corsOptions = {
     "https://lkctc.edu.in",
     "https://lkctc-admin.web.app/",
     "https://lkctc-admin.web.app",
+    "https://crm-immigration.web.app/",
+    "https://crm-immigration.web.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,
