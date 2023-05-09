@@ -6,10 +6,11 @@ const createNewCase = async(req,res,next) =>{
         const data = new newCase({
             email,
             givenNames,
-            familyName,
             caseType,
             dateOfBirth,
-            access
+            access,
+            familyName,
+
         })
         await data.save();
         res.status(200).json({sucess:true,data});
