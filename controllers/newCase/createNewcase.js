@@ -1,6 +1,7 @@
 const newCase = require("../../models/newCase.model")
 
 const createNewCase = async(req,res,next) =>{
+    console.log(1)
     try{
         const{email,givenNames,familyName,caseType,dateOfBirth,access} = req.body;
         const data = new newCase({
