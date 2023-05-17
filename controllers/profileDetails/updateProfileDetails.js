@@ -15,7 +15,30 @@ const updateProfileDetails = async (req, res, next) => {
         res.send(err);
       }
 
-      let {title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails,imageName } = fields;
+      let {
+        title,
+        firstName,
+        lastName,
+        maritalStatus,
+        countryOfResidence,
+        countryOfCitizenship,
+        dateOfBirth,
+        address,
+        primaryEmail,
+        secondayrEmail,
+        primaryPhone,
+        secondaryPhone,
+        partnerFirstName,
+        partnerLastName,
+        partnerCountryOfResidence,
+        partnerCountryOfCitizenship,
+        partnerEmail,
+        partnerPhone,
+        hasChildren,
+        numberOfChildren,
+        childrenDetails,
+        imageName,
+      } = fields;
 
       // upload files to s3`
       const filesArray = Object.values(files);
@@ -38,16 +61,39 @@ const updateProfileDetails = async (req, res, next) => {
         })
       );
 
-   
+      const payload = {
+        title,
+        firstName,
+        lastName,
+        maritalStatus,
+        countryOfResidence,
+        countryOfCitizenship,
+        dateOfBirth,
+        address,
+        primaryEmail,
+        secondayrEmail,
+        primaryPhone,
+        secondaryPhone,
+        partnerFirstName,
+        partnerLastName,
+        partnerCountryOfResidence,
+        partnerCountryOfCitizenship,
+        partnerEmail,
+        partnerPhone,
+        hasChildren,
+        numberOfChildren,
+        childrenDetails,
+        imageName,
+      };
+      if (allFileUploadedArray.length) {
+        payload.media = allFileUploadedArray;
+      }
 
       const profileDetails = await ProfileDetails.findOneAndUpdate(
         {
           _id: Object(id),
         },
-        {
-          media : allFileUploadedArray,
-          title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails,imageName
-        },
+        payload,
         { new: true }
       );
 
