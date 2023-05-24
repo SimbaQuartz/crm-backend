@@ -6,12 +6,14 @@ const validateAccessToken = require("../../middlewares/jwtValidation");
 const user = require("./user.rout");
 const getCountryCode = require("../../controllers/CountryCode/CountryCode");
 const ProfileDetails = require("./ProfileDetail.route.js");
-const NewCase = require("./NewCase.route")
+const NewCase = require("./NewCase.route");
+const CaseNote = require("./CaseNote.route");
 
 router.use("/auth", authRoutes);
 router.use("/user", user);
 router.use("/ProfileDetail", ProfileDetails);
 router.use("/newCase", NewCase);
+router.use("/CaseNote", CaseNote);
 router.get("/countryCode", getCountryCode);
 
 router.get("/test", validateAccessToken, (req, res) => {
