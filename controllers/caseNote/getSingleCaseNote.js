@@ -3,6 +3,13 @@ const { ObjectId } = require("mongoose").Types;
 const getSingleNoteCase = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    const checkId = await NoteCase.findOne({ _id: ObjectId(id) });
+
+    if (!checkId) {
+      res.send({ message: "Note Case id is not valid or Note Case not found" });
+    }
+
     const data = await NoteCase.findOne({ _id: ObjectId(id) });
     res
       .status(200)

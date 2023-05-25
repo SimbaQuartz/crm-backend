@@ -8,11 +8,13 @@ const getCountryCode = require("../../controllers/CountryCode/CountryCode");
 const ProfileDetails = require("./ProfileDetail.route.js");
 const NewCase = require("./NewCase.route");
 const CaseNote = require("./CaseNote.route");
+const Task = require("./Task.route");
 
 router.use("/auth", authRoutes);
 router.use("/user", user);
 router.use("/ProfileDetail", ProfileDetails);
 router.use("/newCase", NewCase);
+router.use("/Task", Task);
 router.use("/CaseNote", CaseNote);
 router.get("/countryCode", getCountryCode);
 
