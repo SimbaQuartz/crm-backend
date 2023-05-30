@@ -29,7 +29,7 @@ const createStaff = async (req, res, next) => {
       const checkEmail = await StaffModel.findOne({ email: email });
 
       if (checkEmail) {
-        return res.send({ message: "email already exists" });
+        return res.status(409).send({ message: "email already exists" });
       }
 
       const checkMobile = await StaffModel.findOne({
@@ -37,7 +37,7 @@ const createStaff = async (req, res, next) => {
       });
 
       if (checkMobile) {
-        return res.send({ message: "phone no. already exists" });
+        return res.status(409).send({ message: "phone no. already exists" });
       }
 
       const data = StaffModel({

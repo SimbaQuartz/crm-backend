@@ -25,23 +25,23 @@ const createUser = async (req, res, next) => {
 
       const checkEmail = await User.findOne({ email: email });
       if (checkEmail) {
-        return res.send({ message: "email already exists" });
+        return res.status(409).send({ message: "email already exists" });
       }
 
       const checkSiteId = await User.findOne({ siteId: siteId });
       if (checkSiteId) {
-        return res.send({ message: "siteId already exists" });
+        return res.status(409).send({ message: "siteId already exists" });
       }
 
       const checkMobile = await User.findOne({
         phoneNumber: phoneNumber,
       });
       if (checkMobile) {
-        return res.send({ message: "phone no. already exists" });
+        return res.status(409).send({ message: "phone no. already exists" });
       }
 
       if (password !== confirmPassword)
-        return res.send({ message: "password not matching" });
+        return res.status(400).send({ message: "password not matching" });
 
       const salt = await bcrypt.genSalt(10);
       const hashPassword = await bcrypt.hash(password, salt);

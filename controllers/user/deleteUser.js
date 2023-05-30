@@ -8,7 +8,9 @@ const deleteUser = async (req, res, next) => {
     const checkId = await User.findOne({ _id: ObjectId(id) });
 
     if (!checkId) {
-      res.send({ message: "User id is not valid or User not found" });
+      res
+        .status(400)
+        .send({ message: "User id is not valid or User not found" });
     }
 
     const data = await User.findOneAndDelete({ _id: ObjectId(id) });

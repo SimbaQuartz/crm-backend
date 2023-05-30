@@ -7,7 +7,9 @@ const updateTasks = async (req, res, next) => {
     const checkId = await Tasks.findOne({ _id: ObjectId(id) });
 
     if (!checkId) {
-      res.send({ message: "Task id is not valid or Task not found" });
+      return res
+        .status(400)
+        .send({ message: "Tasks id is not valid or Tasks not found" });
     }
 
     const data2 = req.body;

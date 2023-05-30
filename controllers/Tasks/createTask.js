@@ -15,8 +15,12 @@ const createTasks = async (req, res, next) => {
     } = req.body;
 
     if (!assignees && !assignees?.length) {
-      throw createError.BadRequest("At least one assignee is required.");
+      // throw createError.BadRequest(400, "At least one assignee is required.");
+      return res
+        .status(400)
+        .send({ message: "At least one assignee is required." });
     }
+
     const data = new Tasks({
       task,
       dueDate,

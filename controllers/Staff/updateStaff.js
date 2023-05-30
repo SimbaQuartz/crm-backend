@@ -8,7 +8,9 @@ const updateStaff = async (req, res, next) => {
     const checkId = await Staff.findOne({ _id: ObjectId(id) });
 
     if (!checkId) {
-      res.send({ message: "Staff id is not valid or Staff not found" });
+      return res
+        .status(400)
+        .send({ message: "Staff id is not valid or Staff not found" });
     }
 
     const form = new formidable.IncomingForm();

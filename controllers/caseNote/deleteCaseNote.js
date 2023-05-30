@@ -8,7 +8,9 @@ const deleteNoteCase = async (req, res, next) => {
     const checkId = await NoteCase.findOne({ _id: ObjectId(id) });
 
     if (!checkId) {
-      res.send({ message: "Note Case id is not valid or Note Case not found" });
+      return res
+        .status(400)
+        .send({ message: "Note Case id is not valid or Note Case not found" });
     }
 
     const data = await NoteCase.findOneAndDelete({ _id: ObjectId(id) });

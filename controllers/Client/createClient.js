@@ -17,7 +17,7 @@ const createStaff = async (req, res, next) => {
       const checkEmail = await Client.findOne({ email: email });
 
       if (checkEmail) {
-        return res.send({ message: "email already exists" });
+        return res.status(400).send({ message: "email already exists" });
       }
 
       //   const checkMobile = await StaffModel.findOne({
