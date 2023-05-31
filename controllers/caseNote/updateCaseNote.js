@@ -7,7 +7,9 @@ const updateNoteCase = async (req, res, next) => {
     const checkId = await NoteCase.findOne({ _id: ObjectId(id) });
 
     if (!checkId) {
-      res.send({ message: "Note Case id is not valid or Note Case not found" });
+      return res
+        .status(400)
+        .send({ message: "Note Case id is not valid or Note Case not found" });
     }
 
     const data2 = req.body;

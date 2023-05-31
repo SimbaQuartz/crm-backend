@@ -15,11 +15,7 @@ const CountrySchema = new Schema({
   ],
 });
 
-const CountryCode = mongoose.model(
-  "countryCodes",
-  CountrySchema,
-  "countryCodes"
-);
+const CountryCode = mongoose.model("countryCode", CountrySchema, "countryCode");
 
 // make this available to our orders in our Node applications
 module.exports = CountryCode;

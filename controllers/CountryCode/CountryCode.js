@@ -14,4 +14,4 @@ const getCountryCode = async function (req, res, next) {
     return res.status(500).send({ message: "Internal error" });
   }
 };
-module.exports=getCountryCode
+module.exports = getCountryCode;
