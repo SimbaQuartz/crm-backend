@@ -1,7 +1,7 @@
 const NewCase = require("../../models/newCase.model");
 const { ObjectId } = require("mongoose").Types;
 
-const deleteNewCase = async (req, res, next) => {
+const getSingleNewCase = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -13,13 +13,17 @@ const deleteNewCase = async (req, res, next) => {
         .send({ message: "NewCase id is not valid or NewCase not found" });
     }
 
-    const data = await NewCase.findOneAndDelete({ _id: ObjectId(id) });
+    const data = await NewCase.findOne({ _id: ObjectId(id) });
     res
       .status(200)
-      .json({ success: true, message: "new case deleted successfully" });
+      .json({
+        success: true,
+        message: "new case fetch successfully",
+        data: data,
+      });
   } catch (error) {
     console.log("error", error);
     next(error);
   }
 };
-module.exports = deleteNewCase;
+module.exports = getSingleNewCase;

@@ -1,10 +1,13 @@
 const express = require("express");
-const createNewCaseData = require("../../controllers/newCase/createNewCaseData");
+const createNewCase = require("../../controllers/newCase/createNewcase");
 const deleteNewCase = require("../../controllers/newCase/deleteNewCase");
 const getAllNewCase = require("../../controllers/newCase/getAllNewCase");
+const getSingleNewCase = require("../../controllers/newCase/getSingleNewCase");
+const updateNewCase = require("../../controllers/newCase/updateNewCase");
 const router = express.Router();
-
-router.delete("/:id",deleteNewCase)
-router.post("/add", createNewCaseData);
-router.get("/", getAllNewCase)
+router.post("/", createNewCase);
+router.delete("/:id", deleteNewCase);
+router.get("/", getAllNewCase);
+router.get("/:id", getSingleNewCase);
+router.put("/:id", updateNewCase);
 module.exports = router;
