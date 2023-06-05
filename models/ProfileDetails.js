@@ -55,6 +55,7 @@ const profileDetails = new Schema(
     primaryEmail: {
       type: String,
       required: true,
+      unique: true,
     },
     secondayrEmail: {
       type: String,
@@ -62,6 +63,7 @@ const profileDetails = new Schema(
     primaryPhone: {
       type: String,
       required: true,
+      unique: true,
     },
     secondaryPhone: {
       type: String,

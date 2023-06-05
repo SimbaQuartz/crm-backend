@@ -35,6 +35,12 @@ const updateStaff = async (req, res, next) => {
         country,
       } = fields;
 
+      // const checkEmail = await Staff.findOne({ email: email });
+
+      // if (checkEmail) {
+      //   return res.status(409).send({ message: "email already exists" });
+      // }
+
       const data = await Staff.findOneAndUpdate(
         { _id: ObjectId(id) },
         {

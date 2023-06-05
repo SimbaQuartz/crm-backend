@@ -2,7 +2,7 @@ const NoteCase = require("../../models/caseNote");
 
 const getAllNoteCase = async (req, res, next) => {
   try {
-    const data = await NoteCase.find();
+    const data = await NoteCase.find().sort({ createdAt: -1 });
     const count = await NoteCase.countDocuments();
     res.status(200).json({
       success: true,
