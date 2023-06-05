@@ -1,0 +1,13 @@
+const express = require("express");
+const createCaseType = require("../../controllers/CaseType/createCaseType");
+const deleteCaseType = require("../../controllers/CaseType/deleteCaseType");
+const getAllCaseType = require("../../controllers/CaseType/getAllCaseType");
+const getSingleCaseType = require("../../controllers/CaseType/getSingleCaseType");
+const updateCaseType = require("../../controllers/CaseType/updateCaseType");
+const router = express.Router();
+router.post("/", createCaseType);
+router.delete("/:id", deleteCaseType);
+router.get("/", getAllCaseType);
+router.get("/:id", getSingleCaseType);
+router.put("/:id", updateCaseType);
+module.exports = router;

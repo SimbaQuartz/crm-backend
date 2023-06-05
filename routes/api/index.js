@@ -8,6 +8,7 @@ const getCountryCode = require("../../controllers/CountryCode/CountryCode");
 const ProfileDetails = require("./ProfileDetail.route.js");
 const NewCase = require("./NewCase.route");
 const CaseNote = require("./CaseNote.route");
+const CaseType = require("./CaseType.route");
 const Task = require("./Task.route");
 const Staff = require("./Staff.route");
 
@@ -18,6 +19,7 @@ router.use("/newCase", NewCase);
 router.use("/task", Task);
 router.use("/staff", Staff);
 router.use("/caseNote", CaseNote);
+router.use("/caseType", CaseType);
 router.get("/countryCode", getCountryCode);
 
 router.get("/test", validateAccessToken, (req, res) => {
