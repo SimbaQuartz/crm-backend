@@ -21,6 +21,7 @@ router.use("/staff", Staff);
 router.use("/caseNote", CaseNote);
 router.use("/caseType", CaseType);
 router.get("/countryCode", getCountryCode);
+router.get("/getCountryList", getCountryCode);
 
 router.get("/test", validateAccessToken, (req, res) => {
   res.status(200).json({
