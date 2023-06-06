@@ -15,7 +15,30 @@ const updateProfileDetails = async (req, res, next) => {
         res.send(err);
       }
 
-      let {title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails,imageName } = fields;
+      let {
+        title,
+        firstName,
+        lastName,
+        maritalStatus,
+        countryOfResidence,
+        countryOfCitizenship,
+        dateOfBirth,
+        address,
+        primaryEmail,
+        secondayrEmail,
+        primaryPhone,
+        secondaryPhone,
+        partnerFirstName,
+        partnerLastName,
+        partnerCountryOfResidence,
+        partnerCountryOfCitizenship,
+        partnerEmail,
+        partnerPhone,
+        hasChildren,
+        numberOfChildren,
+        childrenDetails,
+        imageName,
+      } = fields;
 
       // upload files to s3`
       const filesArray = Object.values(files);
@@ -38,15 +61,34 @@ const updateProfileDetails = async (req, res, next) => {
         })
       );
 
-   
-
       const profileDetails = await ProfileDetails.findOneAndUpdate(
         {
           _id: Object(id),
         },
         {
-          media : allFileUploadedArray,
-          title, firstName, lastName, maritalStatus, countryOfResidence, countryOfCitizenship,dateOfBirth,address,primaryEmail,secondayrEmail,primaryPhone,secondaryPhone,partnerFirstName,partnerLastName,partnerCountryOfResidence,partnerCountryOfCitizenship,partnerEmail,partnerPhone,hasChildren,numberOfChildren,childrenDetails,imageName
+          media: allFileUploadedArray,
+          title,
+          firstName,
+          lastName,
+          maritalStatus,
+          countryOfResidence,
+          countryOfCitizenship,
+          dateOfBirth,
+          address,
+          primaryEmail,
+          secondayrEmail,
+          primaryPhone,
+          secondaryPhone,
+          partnerFirstName,
+          partnerLastName,
+          partnerCountryOfResidence,
+          partnerCountryOfCitizenship,
+          partnerEmail,
+          partnerPhone,
+          hasChildren,
+          numberOfChildren,
+          childrenDetails,
+          imageName,
         },
         { new: true }
       );

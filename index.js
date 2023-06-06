@@ -60,7 +60,7 @@ mongoose
   .then(() => {
     const PORT = process.env.PORT || 5000;
 
-    http.listen(PORT, () => {
+    http.listen(PORT, "0.0.0.0", () => {
       console.log(
         `${chalk.green("✓")} ${chalk.blue(
           "Server Started on port"

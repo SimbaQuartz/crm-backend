@@ -1,7 +1,7 @@
 const User = require("../../models/user.model");
 const formidable = require("formidable");
 const { ObjectId } = require("mongoose").Types;
-const bcrypt = require("bcryptjs");
+const uploadFiles = require("../../services/upload-files");
 
 const updateUser = async (req, res, next) => {
   try {
@@ -22,24 +22,86 @@ const updateUser = async (req, res, next) => {
         res.send(err);
       }
 
-      const { firstName, lastName, email, phoneNumber, siteId, role } = fields;
-      //   console.log("fields", fields);
-      //   if (password !== confirmPassword)
-      //     return res.send({ message: "password not matching" });
+      const {
+        title,
+        maritalStatus,
+        countryOfResidence,
+        countryOfCitizenship,
+        dateOfBirth,
+        address,
+        primaryEmail,
+        secondayrEmail,
+        primaryPhone,
+        secondaryPhone,
+        partnerFirstName,
+        partnerLastName,
+        partnerCountryOfResidence,
+        partnerCountryOfCitizenship,
+        partnerEmail,
+        partnerPhone,
+        hasChildren,
+        numberOfChildren,
+        childrenDetails,
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        siteId,
+        role,
+        imageName,
+      } = fields;
 
-      //   const salt = await bcrypt.genSalt(10);
-      //   const hashPassword = await bcrypt.hash(password, salt);
-      //   const hashPassword2 = await bcrypt.hash(confirmPassword, salt);
+      // upload files to s3`
+      const filesArray = Object.values(files);
+      const allFileUploadedArray = await Promise.all(
+        filesArray?.map(async (item) => {
+          let location = item.path;
+          const originalFileName = item.name;
+          const fileType = item.type;
+          // uploads file.
+          const data = await uploadFiles.upload(
+            location,
+            originalFileName,
+            "post/",
+            null
+          );
+          return {
+            url: data.Location,
+            type: fileType,
+          };
+        })
+      );
 
       const data = await User.findOneAndUpdate(
         { _id: ObjectId(id) },
         {
+          title,
+          maritalStatus,
+          countryOfResidence,
+          countryOfCitizenship,
+          dateOfBirth,
+          address,
+          primaryEmail,
+          secondayrEmail,
+          primaryPhone,
+          secondaryPhone,
+          partnerFirstName,
+          partnerLastName,
+          partnerCountryOfResidence,
+          partnerCountryOfCitizenship,
+          partnerEmail,
+          partnerPhone,
+          hasChildren,
+          numberOfChildren,
+          childrenDetails,
           firstName,
           lastName,
           email,
           phoneNumber,
           siteId,
           role,
+          media: allFileUploadedArray,
+          imageName,
         },
         { new: true }
       );

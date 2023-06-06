@@ -1,8 +1,9 @@
-const path = require("path"); 
-require("dotenv").config({
-  // keys
-  path: "/home/ubuntu/crm-backend/.env",
-});
+// const path = require("path");
+// require("dotenv").config({
+//   // keys
+//   path: "/home/ubuntu/crm-backend/.env",
+// });
+require("dotenv").config({});
 
 module.exports = {
   emailverifyKey: {

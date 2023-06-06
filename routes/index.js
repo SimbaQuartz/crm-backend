@@ -6,6 +6,12 @@ const apiRoutes = require("./api");
 
 router.use("/api", apiRoutes);
 
+router.get("/test", (req, res) => {
+  return res.status(200).json({
+    message: "success",
+  });
+});
+
 router.use("/api", (req, res, next) => {
   next(
     createError.NotFound("The route you are trying to access does not exist.")

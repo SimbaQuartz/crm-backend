@@ -2,29 +2,89 @@ const { Schema, model } = require("mongoose");
 
 const UserSchema = new Schema(
   {
-    // role: {
-    //   type: String,
-    //   required: true,
-    // },
-    // name: {
-    //   type: String,
-    // },
-    // email: {
-    //   type: String,
-    //   lowercase: true,
-    //   required: true,
-    //   unique: true,
-    // },
-    // siteId: {
-    //   type: String,
-    //   required: true,
-    // },
-
-    // password: {
-    //   type: String,
-    //   required: true,
-    // },
-
+    title: {
+      type: String,
+      enum: ["Mr", "Miss", "Mrs"],
+      required: true,
+    },
+    maritalStatus: {
+      type: String,
+      enum: [
+        "Annulled Marriage",
+        "Common-Law",
+        "Divorced",
+        "Legally Separated",
+        "Married",
+        "Single/Never Married",
+        "Widowed",
+      ],
+      required: true,
+    },
+    countryOfResidence: {
+      type: String,
+      required: true,
+    },
+    countryOfCitizenship: {
+      type: String,
+      required: true,
+    },
+    dateOfBirth: {
+      type: Date,
+      required: true,
+    },
+    media: [
+      {
+        url: { type: String },
+        type: { type: String, default: "image" },
+      },
+    ],
+    address: {
+      type: String,
+      required: true,
+    },
+    primaryEmail: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    secondayrEmail: {
+      type: String,
+    },
+    primaryPhone: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    secondaryPhone: {
+      type: String,
+    },
+    partnerFirstName: {
+      type: String,
+    },
+    partnerLastName: {
+      type: String,
+    },
+    partnerCountryOfResidence: {
+      type: String,
+    },
+    partnerCountryOfCitizenship: {
+      type: String,
+    },
+    partnerEmail: {
+      type: String,
+    },
+    partnerPhone: {
+      type: String,
+    },
+    hasChildren: {
+      type: Boolean,
+    },
+    numberOfChildren: {
+      type: Number,
+    },
+    childrenDetails: {
+      type: String,
+    },
     firstName: {
       type: String,
       required: true,
@@ -44,7 +104,7 @@ const UserSchema = new Schema(
     },
     siteId: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
     },
     password: {
@@ -57,6 +117,10 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
+    },
+    imageName: {
+      type: String,
+      required: false,
     },
   },
   { timestamps: true }
