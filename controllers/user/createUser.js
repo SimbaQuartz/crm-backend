@@ -35,7 +35,6 @@ const createUser = async (req, res, next) => {
         firstName,
         lastName,
         email,
-        phoneNumber,
         siteId,
         password,
         confirmPassword,
@@ -54,7 +53,7 @@ const createUser = async (req, res, next) => {
       // }
 
       const checkMobile = await User.findOne({
-        phoneNumber: phoneNumber,
+        primaryPhone: primaryPhone,
       });
       if (checkMobile) {
         return res.status(409).send({ message: "phone no. already exists" });
@@ -111,7 +110,6 @@ const createUser = async (req, res, next) => {
         firstName,
         lastName,
         email,
-        phoneNumber,
         siteId,
         password: hashPassword,
         role,

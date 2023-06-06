@@ -99,9 +99,6 @@ const UserSchema = new Schema(
       unique: true,
       lowercase: true,
     },
-    phoneNumber: {
-      type: Number,
-    },
     siteId: {
       type: String,
       required: false,
