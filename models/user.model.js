@@ -47,7 +47,7 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    secondayrEmail: {
+    secondaryEmail: {
       type: String,
     },
     primaryPhone: {
@@ -93,12 +93,6 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-    },
     siteId: {
       type: String,
       required: false,
@@ -106,11 +100,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
-    },
-    confirmPassword: {
-      type: String,
-      required: true,
+      required: false,
     },
     role: {
       type: String,

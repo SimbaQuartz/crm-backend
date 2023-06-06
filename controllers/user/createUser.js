@@ -12,6 +12,7 @@ const createUser = async (req, res, next) => {
         res.status(400);
         res.send(err);
       }
+      console.log(fields, "fields");
       const {
         title,
         maritalStatus,
@@ -20,7 +21,7 @@ const createUser = async (req, res, next) => {
         dateOfBirth,
         address,
         primaryEmail,
-        secondayrEmail,
+        secondaryEmail,
         primaryPhone,
         secondaryPhone,
         partnerFirstName,
@@ -34,33 +35,27 @@ const createUser = async (req, res, next) => {
         childrenDetails,
         firstName,
         lastName,
-        email,
         siteId,
-        password,
-        confirmPassword,
         role,
         imageName,
       } = fields;
 
-      const checkEmail = await User.findOne({ email: email });
+      const checkEmail = await User.findOne({ primaryEmail: primaryEmail });
       if (checkEmail) {
         return res.status(409).send({ message: "email already exists" });
       }
-
       // const checkSiteId = await User.findOne({ siteId: siteId });
       // if (checkSiteId) {
       //   return res.status(409).send({ message: "siteId already exists" });
       // }
-
       const checkMobile = await User.findOne({
         primaryPhone: primaryPhone,
       });
       if (checkMobile) {
         return res.status(409).send({ message: "phone no. already exists" });
       }
-
-      if (password !== confirmPassword)
-        return res.status(400).send({ message: "password not matching" });
+      // if (password !== confirmPassword)
+      //   return res.status(400).send({ message: "password not matching" });
 
       // upload files to s3`
       const filesArray = Object.values(files);
@@ -82,9 +77,9 @@ const createUser = async (req, res, next) => {
           };
         })
       );
-      const salt = await bcrypt.genSalt(10);
-      const hashPassword = await bcrypt.hash(password, salt);
-      const hashPassword2 = await bcrypt.hash(confirmPassword, salt);
+      // const salt = await bcrypt.genSalt(10);
+      // const hashPassword = await bcrypt.hash(password, salt);
+      // const hashPassword2 = await bcrypt.hash(confirmPassword, salt);
 
       const data = await User.create({
         media: allFileUploadedArray,
@@ -95,7 +90,7 @@ const createUser = async (req, res, next) => {
         dateOfBirth,
         address,
         primaryEmail,
-        secondayrEmail,
+        secondaryEmail,
         primaryPhone,
         secondaryPhone,
         partnerFirstName,
@@ -109,12 +104,9 @@ const createUser = async (req, res, next) => {
         childrenDetails,
         firstName,
         lastName,
-        email,
         siteId,
-        password: hashPassword,
         role,
         imageName,
-        confirmPassword: hashPassword2,
       });
 
       return res
