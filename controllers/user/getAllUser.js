@@ -2,7 +2,7 @@ const User = require("../../models/user.model");
 
 const getAllUser = async (req, res, next) => {
   try {
-    const data = await User.find();
+    const data = await User.find({ role: "user" });
     const count = await User.countDocuments();
     res.status(200).json({
       success: true,
