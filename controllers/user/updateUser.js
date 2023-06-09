@@ -52,65 +52,53 @@ const updateUser = async (req, res, next) => {
 
       // upload files to s3`
       const filesArray = Object.values(files);
-      let updateDataObject = {
-        title,
-        maritalStatus,
-        countryOfResidence,
-        countryOfCitizenship,
-        dateOfBirth,
-        address,
-        primaryEmail,
-        secondaryEmail,
-        primaryPhone,
-        secondaryPhone,
-        partnerFirstName,
-        partnerLastName,
-        partnerCountryOfResidence,
-        partnerCountryOfCitizenship,
-        partnerEmail,
-        partnerPhone,
-        hasChildren,
-        numberOfChildren,
-        childrenDetails,
-        firstName,
-        lastName,
-        siteId,
-        role,
-        imageName,
-      };
-      if (media !== "") {
-        const allFileUploadedArray = await Promise.all(
-          filesArray?.map(async (item) => {
-            let location = item.path;
-            const originalFileName = item.name;
-            const fileType = item.type;
-            // uploads file.
-            const data = await uploadFiles.upload(
-              location,
-              originalFileName,
-              "post/",
-              null
-            );
-            return {
-              url: data.Location,
-              type: fileType,
-            };
-          })
-        );
-        updateDataObject = {
-          updateDataObject,
-          ...{ media: allFileUploadedArray },
-        };
-      } else {
-        updateDataObject = {
-          updateDataObject,
-          ...{ media: checkId.media },
-        };
-      }
-
+      const allFileUploadedArray = await Promise.all(
+        filesArray?.map(async (item) => {
+          let location = item.path;
+          const originalFileName = item.name;
+          const fileType = item.type;
+          // uploads file.
+          const data = await uploadFiles.upload(
+            location,
+            originalFileName,
+            "post/",
+            null
+          );
+          return {
+            url: data.Location,
+            type: fileType,
+          };
+        })
+      );
       const data = await User.findOneAndUpdate(
         { _id: ObjectId(id) },
-        updateDataObject,
+        {
+          title,
+          maritalStatus,
+          countryOfResidence,
+          countryOfCitizenship,
+          dateOfBirth,
+          address,
+          primaryEmail,
+          secondaryEmail,
+          primaryPhone,
+          secondaryPhone,
+          partnerFirstName,
+          partnerLastName,
+          partnerCountryOfResidence,
+          partnerCountryOfCitizenship,
+          partnerEmail,
+          partnerPhone,
+          hasChildren,
+          numberOfChildren,
+          childrenDetails,
+          firstName,
+          lastName,
+          siteId,
+          role,
+          imageName,
+          media: media !== "" ? allFileUploadedArray : checkId.media,
+        },
         { new: true }
       );
       res
