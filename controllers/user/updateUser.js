@@ -94,7 +94,7 @@ const updateUser = async (req, res, next) => {
           childrenDetails,
           firstName,
           lastName,
-          siteId,
+          siteId: checkId.siteId,
           role,
           imageName,
           media: media !== "" ? allFileUploadedArray : checkId.media,
