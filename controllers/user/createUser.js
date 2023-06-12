@@ -44,19 +44,12 @@ const createUser = async (req, res, next) => {
       if (checkEmail) {
         return res.status(409).send({ message: "email already exists" });
       }
-      // const checkSiteId = await User.findOne({ siteId: siteId });
-      // if (checkSiteId) {
-      //   return res.status(409).send({ message: "siteId already exists" });
-      // }
       const checkMobile = await User.findOne({
         primaryPhone: primaryPhone,
       });
       if (checkMobile) {
         return res.status(409).send({ message: "phone no. already exists" });
       }
-      // if (password !== confirmPassword)
-      //   return res.status(400).send({ message: "password not matching" });
-
       // upload files to s3`
       const filesArray = Object.values(files);
       const allFileUploadedArray = await Promise.all(
@@ -77,10 +70,6 @@ const createUser = async (req, res, next) => {
           };
         })
       );
-      // const salt = await bcrypt.genSalt(10);
-      // const hashPassword = await bcrypt.hash(password, salt);
-      // const hashPassword2 = await bcrypt.hash(confirmPassword, salt);
-
       const data = await User.create({
         media: allFileUploadedArray,
         title,
