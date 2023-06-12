@@ -9,6 +9,7 @@ const ProfileDetails = require("./ProfileDetail.route.js");
 const NewCase = require("./NewCase.route");
 const CaseNote = require("./CaseNote.route");
 const CaseType = require("./CaseType.route");
+const CaseStatus = require("./CaseStatus.route");
 const Task = require("./Task.route");
 const Staff = require("./Staff.route");
 
@@ -20,6 +21,7 @@ router.use("/task", Task);
 router.use("/staff", Staff);
 router.use("/caseNote", CaseNote);
 router.use("/caseType", CaseType);
+router.use("/caseStatus", CaseStatus);
 router.get("/countryCode", getCountryCode);
 router.get("/getCountryList", getCountryCode);
 
