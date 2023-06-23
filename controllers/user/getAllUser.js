@@ -7,6 +7,20 @@ const getAllUser = async (req, res, next) => {
     const data = await User.aggregate([
       { $match: { role: "user" } },
       {
+        $lookup: {
+          localField: "_id",
+          from: "userCase",
+          foreignField: "user",
+          as: "count",
+        },
+      },
+      {
+        $project: {
+          caseCount: { $size: "$count" },
+          originalFields: "$$ROOT",
+        },
+      },
+      {
         $facet: {
           count: [{ $count: "totalCount" }],
           data: [
