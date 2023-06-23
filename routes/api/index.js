@@ -12,6 +12,7 @@ const CaseStatus = require("./CaseStatus.route");
 const Task = require("./Task.route");
 const Staff = require("./Staff.route");
 const userCase = require("./usercase.route");
+const formCase = require("./formCase.route");
 
 router.use("/auth", authRoutes);
 router.use("/user", user);
@@ -24,6 +25,7 @@ router.use("/caseStatus", CaseStatus);
 router.use("/userCase", userCase);
 router.get("/countryCode", getCountryCode);
 router.get("/getCountryList", getCountryCode);
+router.use("/formCase", formCase);
 
 router.get("/test", validateAccessToken, (req, res) => {
   res.status(200).json({

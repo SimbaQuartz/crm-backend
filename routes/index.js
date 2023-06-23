@@ -1,14 +1,23 @@
 const router = require("express").Router();
 const createError = require("http-errors");
 const Notification = require("../models/Notification.model");
-const formParentModel = require("../models/formModel/formParent");
+const formCategories = require("../models/formModel/formCategories");
 
 const apiRoutes = require("./api");
+const formSubCategories = require("../models/formModel/formSubCategories");
 
 router.use("/api", apiRoutes);
 
-router.post("/test", async (req, res) => {
-  const parentSchema = await formParentModel.create(req.body);
+router.post("/cat", async (req, res) => {
+  const parentSchema = await formCategories.create(req.body);
+  return res.status(200).json({
+    success: true,
+    parentSchema,
+  });
+});
+
+router.post("/subcat", async (req, res) => {
+  const parentSchema = await formSubCategories.create(req.body);
   return res.status(200).json({
     success: true,
     parentSchema,
