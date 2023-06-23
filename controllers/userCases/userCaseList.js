@@ -3,13 +3,7 @@ const { ObjectId } = require("mongoose").Types;
 const userModel = require("../../models/user.model");
 
 const userCaseList = async (req, res) => {
-  const { user_id } = req.query;
-  if (!user_id) {
-    return res.status(404).json({
-      success: false,
-      message: "User ID is required.",
-    });
-  }
+  const { user_id } = req.params;
   const user_data = await userModel.findOne({ _id: ObjectId(user_id) });
   const userCaseList = await userCaseModel.aggregate([
     {
@@ -33,7 +27,7 @@ const userCaseList = async (req, res) => {
       },
     },
   ]);
-  const response = { ...user_data._doc, case_list: userCaseList };
+  const response = { ...user_data?._doc, case_list: userCaseList };
   return res.status(200).json({
     success: true,
     message: "Get user cases list successfully.",
