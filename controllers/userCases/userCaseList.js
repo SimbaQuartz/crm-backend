@@ -4,6 +4,12 @@ const userModel = require("../../models/user.model");
 
 const userCaseList = async (req, res) => {
   const { user_id } = req.query;
+  if (!user_id) {
+    return res.status(404).json({
+      success: false,
+      message: "User ID is required.",
+    });
+  }
   const user_data = await userModel.findOne({ _id: ObjectId(user_id) });
   const userCaseList = await userCaseModel.aggregate([
     {
