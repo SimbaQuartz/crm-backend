@@ -6,6 +6,11 @@ const { Schema, model } = require("mongoose");
 
 const TasksSchema = new Schema(
   {
+    userCase: {
+      type: Schema.Types.ObjectId,
+      ref: "userCase",
+      required: true,
+    },
     task: {
       type: String,
       required: true,

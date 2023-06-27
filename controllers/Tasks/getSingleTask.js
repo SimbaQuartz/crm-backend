@@ -1,4 +1,4 @@
-const Tasks = require("../../models/Tasks");
+const Tasks = require("../../models/CaseTasks");
 const { ObjectId } = require("mongoose").Types;
 const getSingleTasks = async (req, res, next) => {
   try {

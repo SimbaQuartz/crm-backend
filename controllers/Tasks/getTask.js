@@ -1,4 +1,4 @@
-const Tasks = require("../../models/Tasks");
+const Tasks = require("../../models/CaseTasks");
 
 const getAllTasks = async (req, res, next) => {
   try {

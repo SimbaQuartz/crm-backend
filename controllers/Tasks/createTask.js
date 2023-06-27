@@ -1,18 +1,9 @@
-const Tasks = require("../../models/Tasks");
+const Tasks = require("../../models/CaseTasks");
 const createError = require("http-errors");
 
 const createTasks = async (req, res, next) => {
   try {
-    const {
-      task,
-      dueDate,
-      timeDue,
-      priority,
-      status,
-      notes,
-      mentions,
-      assignees,
-    } = req.body;
+    const { assignees } = req.body;
 
     if (!assignees && !assignees?.length) {
       // throw createError.BadRequest(400, "At least one assignee is required.");
@@ -21,16 +12,7 @@ const createTasks = async (req, res, next) => {
         .send({ message: "At least one assignee is required." });
     }
 
-    const data = new Tasks({
-      task,
-      dueDate,
-      timeDue,
-      priority,
-      status,
-      notes,
-      mentions,
-      assignees,
-    });
+    const data = new Tasks({ ...req.body, assignees });
     await data.save();
     res
       .status(200)
