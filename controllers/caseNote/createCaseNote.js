@@ -2,12 +2,7 @@ const caseNote = require("../../models/caseNote");
 
 const createCaseNote = async (req, res, next) => {
   try {
-    const { date, subject, notes } = req.body;
-    const data = new caseNote({
-      date,
-      subject,
-      notes,
-    });
+    const data = new caseNote(req.body);
     await data.save();
     res
       .status(200)
